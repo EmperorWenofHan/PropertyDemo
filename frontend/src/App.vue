@@ -198,32 +198,6 @@ onMounted(async () => {
 
       <section class="content-grid">
         <article class="panel area-panel">
-          <div class="panel-heading">
-            <div>
-              <p class="eyebrow">业务入口</p>
-              <h2>六大流程中心</h2>
-            </div>
-            <span>点击左侧或卡片切换</span>
-          </div>
-
-          <div class="module-grid">
-            <button
-              v-for="area in areas"
-              :key="area.name"
-              type="button"
-              class="module-card"
-              :class="{ selected: selectedArea === area.name }"
-              @click="selectedArea = area.name"
-            >
-              <span class="module-icon" :style="{ backgroundColor: area.accent }">{{ area.icon }}</span>
-              <span>
-                <strong>{{ area.name }}</strong>
-                <small>{{ area.tag }}</small>
-              </span>
-              <b>{{ area.metric }}</b>
-            </button>
-          </div>
-
           <div class="field-preview">
             <div class="field-preview-heading">
               <p class="eyebrow">界面显示项</p>

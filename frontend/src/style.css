@@ -49,8 +49,7 @@ button {
 }
 
 .brand-mark,
-.nav-icon,
-.module-icon {
+.nav-icon {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
@@ -319,59 +318,8 @@ h3 {
   font-size: 13px;
 }
 
-.module-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.module-card {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
-  gap: 12px;
-  align-items: center;
-  min-height: 82px;
-  padding: 14px;
-  border: 1px solid #dce4e1;
-  border-radius: 8px;
-  background: #fbfcfc;
-  color: #202a31;
-  text-align: left;
-  cursor: pointer;
-}
-
-.module-card:hover,
-.module-card.selected {
-  border-color: #9ab8b4;
-  background: #f2f7f6;
-}
-
-.module-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-}
-
-.module-card strong,
-.module-card small {
-  display: block;
-}
-
-.module-card small {
-  margin-top: 4px;
-  font-size: 12px;
-}
-
-.module-card b {
-  justify-self: end;
-  color: #202a31;
-  font-size: 18px;
-}
-
 .field-preview {
-  margin-top: 22px;
-  padding-top: 20px;
-  border-top: 1px solid #edf1ef;
+  margin-top: 0;
 }
 
 .field-preview-heading {
@@ -508,7 +456,6 @@ h3 {
   .area-nav,
   .content-grid,
   .field-grid,
-  .module-grid,
   .stat-grid {
     grid-template-columns: 1fr;
   }
