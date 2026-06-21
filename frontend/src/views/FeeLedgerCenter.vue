@@ -17,21 +17,12 @@ const communities = [
       {
         id: 'garden-1',
         name: '1 栋',
-        rooms: [
-          createRoom('garden-1-301', '301', '86.20㎡', '2.60 元/㎡', '224.12', '224.12', '0.00'),
-          createRoom('garden-1-302', '302', '96.40㎡', '2.60 元/㎡', '250.64', '0.00', '250.64'),
-          createRoom('garden-1-401', '401', '112.00㎡', '2.60 元/㎡', '291.20', '191.20', '100.00'),
-          createRoom('garden-1-402', '402', '88.50㎡', '2.60 元/㎡', '230.10', '230.10', '0.00'),
-        ],
+        rooms: createRooms('garden-1', 24, 4, '2.60 元/㎡', [302, 701, 1204, 1802, 2303]),
       },
       {
         id: 'garden-2',
         name: '2 栋',
-        rooms: [
-          createRoom('garden-2-301', '301', '91.00㎡', '2.50 元/㎡', '227.50', '227.50', '0.00'),
-          createRoom('garden-2-302', '302', '102.30㎡', '2.50 元/㎡', '255.75', '100.00', '155.75'),
-          createRoom('garden-2-501', '501', '118.60㎡', '2.50 元/㎡', '296.50', '0.00', '296.50'),
-        ],
+        rooms: createRooms('garden-2', 24, 3, '2.50 元/㎡', [501, 902, 1503, 2101]),
       },
     ],
   },
@@ -43,28 +34,78 @@ const communities = [
       {
         id: 'river-3',
         name: '3 栋',
-        rooms: [
-          createRoom('river-3-301', '301', '79.80㎡', '2.80 元/㎡', '223.44', '223.44', '0.00'),
-          createRoom('river-3-302', '302', '105.00㎡', '2.80 元/㎡', '294.00', '0.00', '294.00'),
-          createRoom('river-3-601', '601', '128.00㎡', '2.80 元/㎡', '358.40', '258.40', '100.00'),
-        ],
+        rooms: createRooms('river-3', 32, 4, '2.80 元/㎡', [302, 1001, 1604, 2402, 3103]),
       },
       {
         id: 'river-4',
         name: '4 栋',
-        rooms: [
-          createRoom('river-4-301', '301', '83.60㎡', '2.80 元/㎡', '234.08', '234.08', '0.00'),
-          createRoom('river-4-302', '302', '99.90㎡', '2.80 元/㎡', '279.72', '0.00', '279.72'),
-        ],
+        rooms: createRooms('river-4', 32, 3, '2.80 元/㎡', [801, 1402, 2203, 3001]),
+      },
+    ],
+  },
+  {
+    id: 'sunny',
+    name: '阳光里小区',
+    summary: '本月收缴率 91.5%，整体回款较稳定。',
+    buildings: [
+      {
+        id: 'sunny-5',
+        name: '5 栋',
+        rooms: createRooms('sunny-5', 24, 4, '2.40 元/㎡', [603, 1102, 1904]),
+      },
+      {
+        id: 'sunny-6',
+        name: '6 栋',
+        rooms: createRooms('sunny-6', 18, 4, '2.40 元/㎡', [401, 1003, 1702]),
+      },
+    ],
+  },
+  {
+    id: 'central',
+    name: '中央公园小区',
+    summary: '本月收缴率 82.6%，高层欠费户需要集中跟进。',
+    buildings: [
+      {
+        id: 'central-8',
+        name: '8 栋',
+        rooms: createRooms('central-8', 32, 4, '3.10 元/㎡', [302, 902, 1501, 2104, 2803, 3202]),
+      },
+      {
+        id: 'central-9',
+        name: '9 栋',
+        rooms: createRooms('central-9', 30, 3, '3.10 元/㎡', [701, 1202, 2003, 2601]),
       },
     ],
   },
 ]
 
+function createRooms(prefix, floors, roomsPerFloor, rate, arrearsRooms) {
+  const rooms = []
+
+  for (let floor = 1; floor <= floors; floor += 1) {
+    for (let unit = 1; unit <= roomsPerFloor; unit += 1) {
+      const roomNo = `${floor}${String(unit).padStart(2, '0')}`
+      const areaNumber = 78 + ((floor * 7 + unit * 11) % 54)
+      const rateNumber = Number.parseFloat(rate)
+      const receivable = (areaNumber * rateNumber).toFixed(2)
+      const hasArrears = arrearsRooms.includes(Number(roomNo))
+      const received = hasArrears ? (Number(receivable) * 0.35).toFixed(2) : receivable
+      const arrears = hasArrears ? (Number(receivable) - Number(received)).toFixed(2) : '0.00'
+
+      rooms.push(createRoom(`${prefix}-${roomNo}`, roomNo, `${areaNumber.toFixed(2)}㎡`, rate, receivable, received, arrears))
+    }
+  }
+
+  return rooms
+}
+
 function createRoom(id, roomNo, area, rate, receivable, received, arrears) {
+  const hasArrears = Number(arrears) > 0
+
   return {
     id,
     roomNo,
+    hasArrears,
     fields: [
       { label: '房号', value: roomNo },
       { label: '面积', value: area },
@@ -76,7 +117,7 @@ function createRoom(id, roomNo, area, rate, receivable, received, arrears) {
       { label: '滞纳金', value: arrears === '0.00' ? '0.00' : '8.20' },
       { label: '分摊', value: '12.00' },
       { label: '缴费凭证', value: received === '0.00' ? '待上传' : '已归档' },
-      { label: '争议记录', value: arrears === '0.00' ? '无' : '1 条' },
+      { label: '争议记录', value: hasArrears ? '1 条' : '无' },
     ],
   }
 }
@@ -182,10 +223,11 @@ onMounted(async () => {
               :key="room.id"
               type="button"
               class="room-card"
-              :class="{ active: selectedRoomId === room.id }"
+              :class="{ active: selectedRoomId === room.id, arrears: room.hasArrears, normal: !room.hasArrears }"
               @click="selectedRoomId = room.id"
             >
-              {{ room.roomNo }}
+              <strong>{{ room.roomNo }}</strong>
+              <span>{{ room.hasArrears ? '欠费' : '正常' }}</span>
             </button>
           </div>
         </section>

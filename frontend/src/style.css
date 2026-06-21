@@ -433,6 +433,8 @@ h2 {
   display: grid;
   align-self: start;
   gap: 14px;
+  max-height: calc(100vh - 128px);
+  overflow: auto;
   padding: 18px;
 }
 
@@ -500,15 +502,48 @@ h2 {
 
 .room-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(72px, 1fr));
+  grid-template-columns: repeat(8, minmax(74px, 1fr));
   gap: 10px;
+  max-height: 430px;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .room-card {
+  display: grid;
+  gap: 6px;
   min-height: 64px;
   padding: 10px;
-  font-size: 20px;
-  font-weight: 800;
+}
+
+.room-card strong,
+.room-card span {
+  display: block;
+}
+
+.room-card strong {
+  font-size: 18px;
+}
+
+.room-card span {
+  font-size: 12px;
+}
+
+.room-card.normal {
+  border-color: #b8d8ca;
+  background: #f3faf6;
+  color: #1f6f4e;
+}
+
+.room-card.arrears {
+  border-color: #e0aaa3;
+  background: #fff5f4;
+  color: #a43d34;
+}
+
+.room-card.active {
+  outline: 3px solid rgba(47, 111, 115, 0.18);
+  outline-offset: 1px;
 }
 
 .ledger-panel {
