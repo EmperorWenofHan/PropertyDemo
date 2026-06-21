@@ -12,44 +12,74 @@ const communities = [
     id: 'garden',
     name: '星河花园小区',
     summary: '重点业主 12 位，本周待触达 28 次。',
-    owners: [
-      createOwner('owner-001', '王女士', ['1栋301'], '03-18', '2021-09-01', ['老人同住', '费用敏感'], '自住', '粤B·A28Q1', '微信优先，晚间勿扰', '生日关怀已完成'),
-      createOwner('owner-002', '李先生', ['1栋302', '2栋1503'], '11-02', '2020-06-15', ['多房业主', '高频咨询'], '自住+出租', '粤B·6M9K2', '电话沟通，关注停车', '本月已触达 2 次'),
-      createOwner('owner-003', '陈女士', ['2栋902'], '07-26', '2022-01-10', ['亲子家庭'], '自住', '无', '活动通知积极', '待确认周末活动意向'),
-      createOwner('owner-004', '赵先生', ['1栋2303'], '12-08', '2019-12-01', ['长期欠费', '重点跟进'], '出租', '粤B·P77D3', '仅接受短信', '承诺本周五回复'),
-    ],
+    owners: createOwners('garden', ['1栋', '2栋'], 160),
   },
   {
     id: 'river',
     name: '滨河公馆小区',
     summary: '空置房较多，需强化触达记录。',
-    owners: [
-      createOwner('owner-101', '周女士', ['3栋302'], '05-09', '2023-03-20', ['新业主'], '自住', '粤B·R21M8', '微信沟通', '入住周年关怀待执行'),
-      createOwner('owner-102', '林先生', ['3栋1604', '4栋801'], '09-14', '2018-08-05', ['多车位', '多房业主'], '空置', '粤B·T88L6', '偏好邮件账单', '上次触达未回复'),
-      createOwner('owner-103', '何女士', ['4栋302'], '01-22', '2021-11-18', ['投诉关注'], '自住', '粤B·K30S2', '电话回访', '已完成噪音投诉回访'),
-    ],
+    owners: createOwners('river', ['3栋', '4栋'], 140),
   },
   {
     id: 'sunny',
     name: '阳光里小区',
     summary: '社区活动活跃，家庭标签完整度较高。',
-    owners: [
-      createOwner('owner-201', '吴先生', ['5栋603'], '08-30', '2020-10-01', ['亲子家庭', '活动积极'], '自住', '粤B·C18F5', '活动推送', '亲子活动已报名'),
-      createOwner('owner-202', '郑女士', ['6栋1003'], '04-11', '2022-05-12', ['独居老人'], '自住', '无', '电话优先', '本周需管家上门关怀'),
-      createOwner('owner-203', '黄先生', ['5栋1904', '6栋1702'], '06-06', '2017-07-07', ['企业高管', '多房业主'], '出租', '粤B·H66N0', '短信即可', '租户资料待更新'),
-    ],
+    owners: createOwners('sunny', ['5栋', '6栋'], 120),
   },
   {
     id: 'central',
     name: '中央公园小区',
     summary: '高净值业主多，服务偏好需要精细维护。',
-    owners: [
-      createOwner('owner-301', '许女士', ['8栋3202'], '02-17', '2019-04-22', ['高净值', '品质敏感'], '自住', '粤B·V88S8', '专属管家沟通', '已安排节日问候'),
-      createOwner('owner-302', '马先生', ['8栋1501'], '10-19', '2021-02-28', ['装修中'], '空置', '粤B·M12Q9', '装修事项电话确认', '装修巡查需跟进'),
-      createOwner('owner-303', '宋女士', ['9栋2601', '8栋2803'], '12-25', '2016-12-01', ['多房业主', '重点关系'], '自住+空置', '粤B·S90D1', '重要事项提前预约', '月度关系维护已完成'),
-    ],
+    owners: createOwners('central', ['8栋', '9栋'], 180),
   },
 ]
+
+function createOwners(prefix, buildings, count) {
+  const surnames = ['王', '李', '陈', '张', '周', '林', '何', '吴', '郑', '黄', '许', '马', '宋', '赵', '刘', '杨']
+  const titles = ['先生', '女士']
+  const tagGroups = [
+    ['亲子家庭'],
+    ['独居老人'],
+    ['费用敏感'],
+    ['高频咨询'],
+    ['投诉关注'],
+    ['活动积极'],
+    ['高净值', '品质敏感'],
+    ['装修中'],
+  ]
+  const vacancyOptions = ['自住', '出租', '空置', '自住+出租']
+  const preferences = ['微信优先，晚间勿扰', '电话沟通，关注停车', '活动通知积极', '仅接受短信', '偏好邮件账单', '专属管家沟通']
+  const touchRecords = ['生日关怀已完成', '本月已触达 2 次', '待确认周末活动意向', '承诺本周五回复', '上次触达未回复', '月度关系维护已完成']
+
+  return Array.from({ length: count }, (_, index) => {
+    const no = index + 1
+    const surname = surnames[index % surnames.length]
+    const title = titles[index % titles.length]
+    const building = buildings[index % buildings.length]
+    const floor = (index % 32) + 1
+    const room = `${floor}${String((index % 4) + 1).padStart(2, '0')}`
+    const homes = [`${building}${room}`]
+
+    if (index % 17 === 0) {
+      const secondBuilding = buildings[(index + 1) % buildings.length]
+      const secondRoom = `${((index + 8) % 32) + 1}${String(((index + 2) % 4) + 1).padStart(2, '0')}`
+      homes.push(`${secondBuilding}${secondRoom}`)
+    }
+
+    return createOwner(
+      `${prefix}-owner-${String(no).padStart(3, '0')}`,
+      `${surname}${title}`,
+      homes,
+      `${String((index % 12) + 1).padStart(2, '0')}-${String((index % 28) + 1).padStart(2, '0')}`,
+      `${2017 + (index % 7)}-${String((index % 12) + 1).padStart(2, '0')}-${String((index % 28) + 1).padStart(2, '0')}`,
+      tagGroups[index % tagGroups.length],
+      vacancyOptions[index % vacancyOptions.length],
+      index % 9 === 0 ? '无' : `粤B·${String(index * 73).padStart(4, '0').slice(-4)}`,
+      preferences[index % preferences.length],
+      touchRecords[index % touchRecords.length],
+    )
+  })
+}
 
 function createOwner(id, name, homes, birthday, anniversary, tags, vacancy, vehicles, preference, touchRecord) {
   return {

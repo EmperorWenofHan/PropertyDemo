@@ -399,6 +399,21 @@ h2 {
   padding: 28px;
 }
 
+.event-page {
+  min-height: 100vh;
+  padding: 28px;
+}
+
+.knowledge-page {
+  min-height: 100vh;
+  padding: 28px;
+}
+
+.report-page {
+  min-height: 100vh;
+  padding: 28px;
+}
+
 .fee-topbar {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -723,15 +738,18 @@ h2 {
 
 .owner-card-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
+  max-height: 430px;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .owner-profile-card {
   display: grid;
   gap: 8px;
-  min-height: 82px;
-  padding: 14px;
+  min-height: 72px;
+  padding: 12px;
   border: 1px solid #dce4e1;
   border-radius: 8px;
   background: #fbfcfc;
@@ -761,6 +779,401 @@ h2 {
 
 .owner-field-grid .room-field-card strong {
   white-space: normal;
+}
+
+.event-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.event-category-rail,
+.event-list-panel {
+  border: 1px solid #d8e1de;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.event-category-rail {
+  display: grid;
+  align-self: start;
+  gap: 12px;
+  padding: 18px;
+}
+
+.event-category-card {
+  display: grid;
+  gap: 8px;
+  min-height: 118px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.event-category-card:hover,
+.event-category-card.active {
+  border-color: #5a648c;
+  background: #f4f5fb;
+}
+
+.event-category-card span {
+  color: #5b6965;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.event-category-card b {
+  justify-self: start;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #eceef8;
+  color: #414a78;
+  font-size: 13px;
+}
+
+.event-workspace {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.event-list-panel {
+  padding: 22px;
+}
+
+.event-list {
+  display: grid;
+  gap: 10px;
+  max-height: 430px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 54px;
+  gap: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.event-row:hover,
+.event-row.active {
+  border-color: #5a648c;
+  background: #f4f5fb;
+}
+
+.event-row.warning {
+  border-color: #d8bd72;
+  background: #fffaf0;
+}
+
+.event-row.severe {
+  border-color: #d5968f;
+  background: #fff5f4;
+}
+
+.event-row span {
+  overflow: hidden;
+  color: #5b6965;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-row b {
+  justify-self: end;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #eef2f1;
+  font-size: 12px;
+}
+
+.event-field-grid .room-field-card {
+  min-height: 112px;
+}
+
+.event-field-grid .room-field-card strong {
+  white-space: normal;
+}
+
+.knowledge-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.knowledge-category-rail,
+.knowledge-workspace .event-list-panel {
+  border: 1px solid #d8e1de;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.knowledge-category-rail {
+  display: grid;
+  align-self: start;
+  gap: 12px;
+  padding: 18px;
+}
+
+.knowledge-category-card {
+  display: grid;
+  gap: 8px;
+  min-height: 112px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.knowledge-category-card:hover,
+.knowledge-category-card.active {
+  border-color: #956f2f;
+  background: #fff9ef;
+}
+
+.knowledge-category-card span {
+  color: #5b6965;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.knowledge-category-card b {
+  justify-self: start;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #f4ead8;
+  color: #715421;
+  font-size: 13px;
+}
+
+.knowledge-workspace {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.knowledge-record-list {
+  display: grid;
+  gap: 10px;
+  max-height: 430px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.knowledge-record-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 80px;
+  gap: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.knowledge-record-row:hover,
+.knowledge-record-row.active {
+  border-color: #956f2f;
+  background: #fff9ef;
+}
+
+.knowledge-record-row span {
+  color: #5b6965;
+}
+
+.knowledge-record-row strong,
+.knowledge-record-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.knowledge-record-row b {
+  justify-self: end;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #f4ead8;
+  color: #715421;
+  font-size: 12px;
+}
+
+.knowledge-field-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.knowledge-field-grid .room-field-card {
+  min-height: 130px;
+}
+
+.knowledge-field-grid .room-field-card strong {
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: normal;
+}
+
+.report-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.report-category-rail,
+.report-workspace .event-list-panel {
+  border: 1px solid #d8e1de;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.report-category-rail {
+  display: grid;
+  align-self: start;
+  gap: 12px;
+  padding: 18px;
+}
+
+.report-category-card {
+  display: grid;
+  gap: 8px;
+  min-height: 112px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.report-category-card:hover,
+.report-category-card.active {
+  border-color: #6f4b7c;
+  background: #faf5fc;
+}
+
+.report-category-card span {
+  color: #5b6965;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.report-category-card b {
+  justify-self: start;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #efe4f2;
+  color: #5c3d67;
+  font-size: 13px;
+}
+
+.report-workspace {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.report-record-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 80px;
+  gap: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.report-record-row:hover,
+.report-record-row.active {
+  border-color: #6f4b7c;
+  background: #faf5fc;
+}
+
+.report-record-row span {
+  color: #5b6965;
+}
+
+.report-record-row strong,
+.report-record-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-record-row b {
+  justify-self: end;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #efe4f2;
+  color: #5c3d67;
+  font-size: 12px;
+}
+
+.report-field-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.report-field-grid .room-field-card strong {
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: normal;
+}
+
+.export-panel {
+  min-height: 0;
+}
+
+.export-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.export-card {
+  display: grid;
+  gap: 8px;
+  min-height: 104px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+}
+
+.export-card span {
+  color: #5b6965;
+  font-size: 13px;
+}
+
+.export-card b {
+  justify-self: start;
+  align-self: end;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #efe4f2;
+  color: #5c3d67;
+  font-size: 12px;
 }
 
 @media (max-width: 1180px) {
@@ -797,8 +1210,26 @@ h2 {
   .room-grid,
   .owner-card-grid,
   .risk-grid,
+  .event-layout,
+  .knowledge-layout,
+  .knowledge-field-grid,
+  .report-layout,
+  .report-field-grid,
+  .export-grid,
   .owner-layout,
   .workorder-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-record-row {
+    grid-template-columns: 1fr;
+  }
+
+  .report-record-row {
+    grid-template-columns: 1fr;
+  }
+
+  .event-row {
     grid-template-columns: 1fr;
   }
 

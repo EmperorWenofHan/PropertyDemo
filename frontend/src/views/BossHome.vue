@@ -63,21 +63,21 @@ const platformEntries = [
     desc: '投诉事件、群体反馈、安全隐患、处置节点、责任人、升级记录和证据附件。',
     icon: '事',
     accent: '#5a648c',
-    to: '/',
+    to: '/event-trace',
   },
   {
     name: '服务标准与案例知识库',
     desc: '标准话术、服务 SOP、禁止承诺清单、典型案例、培训任务和考核记录。',
     icon: '知',
     accent: '#956f2f',
-    to: '/',
+    to: '/knowledge-base',
   },
   {
     name: '经营数据仓与报表中心',
     desc: '收费、工单、风险、关怀、培训数据汇总，周报月报模板和导出材料。',
     icon: '报',
     accent: '#6f4b7c',
-    to: '/',
+    to: '/reports',
   },
 ]
 
