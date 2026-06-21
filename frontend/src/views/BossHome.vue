@@ -49,7 +49,7 @@ const platformEntries = [
     desc: '报修、咨询、投诉入口，工单编号、派单、状态、超时、图片和回访记录。',
     icon: '工',
     accent: '#4f6f52',
-    to: '/',
+    to: '/work-orders',
   },
   {
     name: '业主关系档案与触达任务中心',

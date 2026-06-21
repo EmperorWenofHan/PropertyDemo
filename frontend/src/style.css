@@ -389,6 +389,11 @@ h2 {
   padding: 28px;
 }
 
+.workorder-page {
+  min-height: 100vh;
+  padding: 28px;
+}
+
 .fee-topbar {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -579,6 +584,119 @@ h2 {
   white-space: nowrap;
 }
 
+.workorder-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.workorder-category-rail,
+.workorder-workspace .room-selector-panel {
+  border: 1px solid #d8e1de;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.workorder-category-rail {
+  display: grid;
+  align-self: start;
+  gap: 12px;
+  padding: 18px;
+}
+
+.workorder-category-card {
+  display: grid;
+  gap: 8px;
+  min-height: 118px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.workorder-category-card:hover,
+.workorder-category-card.active {
+  border-color: #4f6f52;
+  background: #f3f8f3;
+}
+
+.workorder-category-card span {
+  color: #5b6965;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.workorder-category-card b {
+  justify-self: start;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #e7f0e7;
+  color: #315c35;
+  font-size: 13px;
+}
+
+.workorder-workspace {
+  min-width: 0;
+}
+
+.order-list {
+  display: grid;
+  gap: 10px;
+  max-height: calc(100vh - 206px);
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.order-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.3fr) minmax(150px, 1fr) 110px 90px minmax(220px, 1.2fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 86px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+}
+
+.order-card.normal {
+  border-color: #b8d8ca;
+  background: #f3faf6;
+}
+
+.order-card.abnormal {
+  border-color: #e0aaa3;
+  background: #fff5f4;
+}
+
+.order-main,
+.order-field,
+.order-visit {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.order-main span,
+.order-field span,
+.order-visit span {
+  color: #5b6965;
+  font-size: 12px;
+}
+
+.order-main strong,
+.order-field strong,
+.order-visit strong {
+  overflow: hidden;
+  color: #202a31;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 1180px) {
   .boss-home {
     grid-template-columns: 1fr;
@@ -611,7 +729,12 @@ h2 {
   .platform-list,
   .room-field-grid,
   .room-grid,
-  .risk-grid {
+  .risk-grid,
+  .workorder-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-card {
     grid-template-columns: 1fr;
   }
 
