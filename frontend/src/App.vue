@@ -14,6 +14,19 @@ const areas = [
     metric: '87.3%',
     metricLabel: '物业费收缴率',
     summary: '管理房号、面积、费率、应收、实收、欠费、预收冲抵、滞纳金、分摊、缴费凭证和争议记录。',
+    responsibilities: [
+      '房号',
+      '面积',
+      '费率',
+      '应收',
+      '实收',
+      '欠费',
+      '预收冲抵',
+      '滞纳金',
+      '分摊',
+      '缴费凭证',
+      '争议记录',
+    ],
     tasks: ['回款记录核对', '争议证据归档', '承诺兑现跟进'],
   },
   {
@@ -24,6 +37,7 @@ const areas = [
     metric: '42',
     metricLabel: '待处理诉求',
     summary: '统一承接报修、咨询、投诉入口，跟踪工单编号、派单、状态、超时、图片和回访记录。',
+    responsibilities: ['报修/咨询/投诉入口', '工单编号', '派单', '状态', '超时', '图片', '回访记录'],
     tasks: ['工单闭环检查', '现场照片补全', '回访满意度确认'],
   },
   {
@@ -34,6 +48,7 @@ const areas = [
     metric: '126',
     metricLabel: '今日触达任务',
     summary: '沉淀生日、入住周年、家庭标签、空置状态、车辆、服务偏好和触达记录，形成持续服务关系。',
+    responsibilities: ['生日', '入住周年', '家庭标签', '空置状态', '车辆', '服务偏好', '触达记录'],
     tasks: ['关怀任务执行', '触达结果登记', '业主反馈整理'],
   },
   {
@@ -44,6 +59,7 @@ const areas = [
     metric: '9',
     metricLabel: '重点风险事件',
     summary: '记录投诉事件、群体反馈、安全隐患、处置节点、责任人、升级记录和证据附件。',
+    responsibilities: ['投诉事件', '群体反馈', '安全隐患', '处置节点', '责任人', '升级记录', '证据附件'],
     tasks: ['风险台账更新', '处置过程补录', '责任链确认'],
   },
   {
@@ -54,6 +70,7 @@ const areas = [
     metric: '36',
     metricLabel: '在训服务标准',
     summary: '维护标准话术、服务 SOP、禁止承诺清单、典型案例、培训任务和考核记录。',
+    responsibilities: ['标准话术', '服务 SOP', '禁止承诺清单', '典型案例', '培训任务', '考核记录'],
     tasks: ['培训记录归档', '质检结果复盘', '典型案例沉淀'],
   },
   {
@@ -64,6 +81,7 @@ const areas = [
     metric: '12',
     metricLabel: '本月报表材料',
     summary: '汇总收费、工单、风险、关怀、培训数据，沉淀周报、月报模板和可导出经营材料。',
+    responsibilities: ['收费数据', '工单数据', '风险数据', '关怀数据', '培训数据', '周报/月报模板', '导出材料'],
     tasks: ['老板周报生成', '月报数据校验', '续约证据整理'],
   },
 ]
@@ -83,6 +101,27 @@ const workOrders = [
 ]
 
 const activeArea = computed(() => areas.find((area) => area.name === selectedArea.value) ?? areas[0])
+
+const fieldSamples = {
+  房号: '1-1201',
+  面积: '96.40㎡',
+  费率: '2.60 元/㎡',
+  应收: '250.64',
+  实收: '0.00',
+  欠费: '250.64',
+  预收冲抵: '100.00',
+  滞纳金: '8.20',
+  分摊: '12.00',
+  缴费凭证: '查看凭证',
+  争议记录: '1 条',
+}
+
+const activeFields = computed(() =>
+  (activeArea.value.responsibilities ?? []).map((field) => ({
+    label: field,
+    value: fieldSamples[field] ?? '待录入',
+  })),
+)
 
 onMounted(async () => {
   try {
@@ -183,6 +222,19 @@ onMounted(async () => {
               </span>
               <b>{{ area.metric }}</b>
             </button>
+          </div>
+
+          <div class="field-preview">
+            <div class="field-preview-heading">
+              <p class="eyebrow">界面显示项</p>
+              <h3>{{ activeArea.name }}</h3>
+            </div>
+            <div class="field-grid">
+              <label v-for="field in activeFields" :key="field.label" class="field-card">
+                <span>{{ field.label }}</span>
+                <strong>{{ field.value }}</strong>
+              </label>
+            </div>
           </div>
         </article>
 
