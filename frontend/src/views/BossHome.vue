@@ -56,7 +56,7 @@ const platformEntries = [
     desc: '生日、入住周年、家庭标签、空置状态、车辆、服务偏好和触达记录。',
     icon: '档',
     accent: '#8a5a44',
-    to: '/',
+    to: '/owner-relations',
   },
   {
     name: '事件留痕与升级处置中心',
