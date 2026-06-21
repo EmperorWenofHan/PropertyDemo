@@ -344,6 +344,7 @@ h2 {
 }
 
 .platform-card {
+  text-decoration: none;
   width: 100%;
   min-height: 96px;
   gap: 12px;
@@ -397,6 +398,8 @@ h2 {
 }
 
 .back-button {
+  display: grid;
+  place-items: center;
   min-width: 76px;
   min-height: 40px;
   border: 1px solid #d8e1de;
@@ -404,6 +407,7 @@ h2 {
   background: #ffffff;
   color: #202a31;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .back-button:hover {
@@ -413,54 +417,75 @@ h2 {
 
 .fee-layout {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-columns: 320px minmax(0, 1fr);
   gap: 18px;
 }
 
-.fee-item-rail,
-.fee-hero,
+.fee-community-rail,
+.room-selector-panel,
 .ledger-panel {
   border: 1px solid #d8e1de;
   border-radius: 8px;
   background: #ffffff;
 }
 
-.fee-item-rail {
+.fee-community-rail {
   display: grid;
   align-self: start;
-  gap: 10px;
+  gap: 14px;
   padding: 18px;
 }
 
-.fee-item-card {
+.community-card {
   display: grid;
-  gap: 8px;
-  min-height: 72px;
-  padding: 12px;
+  gap: 10px;
+}
+
+.community-button,
+.building-button,
+.room-card {
   border: 1px solid #dce4e1;
   border-radius: 8px;
   background: #fbfcfc;
   color: #202a31;
-  text-align: left;
   cursor: pointer;
 }
 
-.fee-item-card:hover,
-.fee-item-card.active {
+.community-button {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  min-height: 88px;
+  padding: 14px;
+  text-align: left;
+}
+
+.community-button:hover,
+.community-button.active,
+.building-button:hover,
+.building-button.active,
+.room-card:hover,
+.room-card.active {
   border-color: #2f6f73;
   background: #f2f7f6;
 }
 
-.fee-item-card span {
+.community-button span {
   color: #5b6965;
   font-size: 13px;
+  line-height: 1.5;
 }
 
-.fee-item-card strong {
-  overflow: hidden;
-  font-size: 18px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.building-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.building-button {
+  min-height: 42px;
+  padding: 8px 10px;
+  font-weight: 700;
 }
 
 .fee-workspace {
@@ -469,74 +494,52 @@ h2 {
   min-width: 0;
 }
 
-.fee-hero {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  min-height: 170px;
-  padding: 26px;
+.room-selector-panel {
+  padding: 22px;
 }
 
-.fee-hero p:last-child {
-  max-width: 720px;
-  margin-bottom: 0;
-  color: #52615d;
-  font-size: 16px;
-  line-height: 1.7;
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(72px, 1fr));
+  gap: 10px;
 }
 
-.fee-status-card {
+.room-card {
+  min-height: 64px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ledger-panel {
+  padding: 22px;
+}
+
+.room-field-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.room-field-card {
   display: grid;
   gap: 10px;
-  min-width: 180px;
-  align-self: stretch;
-  padding: 18px;
-  border-left: 5px solid #2f6f73;
+  min-height: 86px;
+  padding: 14px;
+  border: 1px solid #dce4e1;
   border-radius: 8px;
-  background: #f7faf9;
+  background: #fbfcfc;
 }
 
-.fee-status-card span {
+.room-field-card span {
   color: #5b6965;
   font-size: 13px;
 }
 
-.fee-status-card strong {
-  align-self: end;
-  font-size: 24px;
-}
-
-.ledger-panel {
-  overflow-x: auto;
-  padding: 22px;
-}
-
-.ledger-table {
-  min-width: 1100px;
-}
-
-.ledger-row {
-  display: grid;
-  grid-template-columns: 90px 90px 110px 90px 90px 90px 120px 90px 90px 120px 110px;
-  gap: 10px;
-  min-height: 52px;
-  align-items: center;
-  padding: 0 12px;
-  border-top: 1px solid #edf1ef;
-}
-
-.ledger-head {
-  min-height: 42px;
-  border-top: 0;
-  border-radius: 8px;
-  background: #f3f6f5;
-  font-weight: 800;
-}
-
-.ledger-row span {
+.room-field-card strong {
   overflow: hidden;
-  color: #3d4a46;
-  font-size: 13px;
+  color: #202a31;
+  font-size: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -563,7 +566,6 @@ h2 {
 
   .topbar,
   .summary-hero,
-  .fee-hero,
   .fee-grid {
     align-items: stretch;
     flex-direction: column;
@@ -572,16 +574,14 @@ h2 {
   .insight-grid,
   .fee-layout,
   .platform-list,
+  .room-field-grid,
+  .room-grid,
   .risk-grid {
     grid-template-columns: 1fr;
   }
 
   .fee-topbar {
     grid-template-columns: 1fr;
-  }
-
-  .ledger-panel {
-    overflow-x: auto;
   }
 
   h1 {
