@@ -3,6 +3,8 @@ import { onMounted, ref } from 'vue'
 
 const connectionMessage = ref('正在连接 Java 后端...')
 const connectionStatus = ref('checking')
+const currentView = ref('home')
+const selectedFeeItem = ref('房号')
 
 const feeProgress = {
   rate: 87.3,
@@ -74,6 +76,27 @@ const platformEntries = [
   },
 ]
 
+const feeLedgerItems = [
+  { name: '房号', value: '1-1201', desc: '定位收费对象，关联业主、楼栋、单元和房屋档案。' },
+  { name: '面积', value: '96.40㎡', desc: '用于计算物业费、分摊费用和公共能耗费用。' },
+  { name: '费率', value: '2.60 元/㎡', desc: '记录当前收费标准，支持不同项目或业态差异化配置。' },
+  { name: '应收', value: '250.64', desc: '按面积、费率和收费周期计算出的本期应收金额。' },
+  { name: '实收', value: '0.00', desc: '业主已实际缴纳金额，用于和应收金额进行核对。' },
+  { name: '欠费', value: '250.64', desc: '应收扣除实收、预收冲抵后的未结清金额。' },
+  { name: '预收冲抵', value: '100.00', desc: '使用业主预存款抵扣本期费用，形成可追踪冲抵记录。' },
+  { name: '滞纳金', value: '8.20', desc: '根据逾期天数和规则计算，用于欠费催缴与争议说明。' },
+  { name: '分摊', value: '12.00', desc: '记录公共能耗、电梯、水泵等按规则分摊到户的费用。' },
+  { name: '缴费凭证', value: '查看凭证', desc: '保存转账截图、收据、电子支付流水等付款证明。' },
+  { name: '争议记录', value: '1 条', desc: '记录业主异议、沟通过程、证据材料和最终处理结果。' },
+]
+
+function openPlatform(platform) {
+  if (platform.name === '收费台账与回款流程中心') {
+    currentView.value = 'feeLedger'
+    selectedFeeItem.value = '房号'
+  }
+}
+
 onMounted(async () => {
   try {
     const response = await fetch('http://localhost:8080/api/hello')
@@ -88,7 +111,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="boss-home">
+  <main v-if="currentView === 'home'" class="boss-home">
     <section class="dashboard">
       <header class="topbar">
         <div>
@@ -194,7 +217,13 @@ onMounted(async () => {
       </div>
 
       <div class="platform-list">
-        <button v-for="platform in platformEntries" :key="platform.name" type="button" class="platform-card">
+        <button
+          v-for="platform in platformEntries"
+          :key="platform.name"
+          type="button"
+          class="platform-card"
+          @click="openPlatform(platform)"
+        >
           <span class="platform-icon" :style="{ backgroundColor: platform.accent }">{{ platform.icon }}</span>
           <span>
             <strong>{{ platform.name }}</strong>
@@ -203,5 +232,73 @@ onMounted(async () => {
         </button>
       </div>
     </aside>
+  </main>
+
+  <main v-else class="fee-page">
+    <header class="fee-topbar">
+      <button type="button" class="back-button" @click="currentView = 'home'">返回</button>
+      <div>
+        <p class="eyebrow">收费平台</p>
+        <h1>收费台账与回款流程中心</h1>
+      </div>
+      <div class="connection-pill">
+        <span class="status-dot" :class="connectionStatus"></span>
+        <span>{{ connectionMessage }}</span>
+      </div>
+    </header>
+
+    <section class="fee-layout">
+      <aside class="fee-item-rail">
+        <div class="dock-heading">
+          <p class="eyebrow">项目卡</p>
+          <h2>台账字段</h2>
+        </div>
+
+        <button
+          v-for="item in feeLedgerItems"
+          :key="item.name"
+          type="button"
+          class="fee-item-card"
+          :class="{ active: selectedFeeItem === item.name }"
+          @click="selectedFeeItem = item.name"
+        >
+          <span>{{ item.name }}</span>
+          <strong>{{ item.value }}</strong>
+        </button>
+      </aside>
+
+      <section class="fee-workspace">
+        <section class="fee-hero">
+          <div>
+            <p class="eyebrow">当前字段</p>
+            <h2>{{ selectedFeeItem }}</h2>
+            <p>{{ feeLedgerItems.find((item) => item.name === selectedFeeItem)?.desc }}</p>
+          </div>
+          <div class="fee-status-card">
+            <span>当前样例值</span>
+            <strong>{{ feeLedgerItems.find((item) => item.name === selectedFeeItem)?.value }}</strong>
+          </div>
+        </section>
+
+        <section class="panel ledger-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">收费台账</p>
+              <h2>房屋收费明细</h2>
+            </div>
+            <span>样例数据</span>
+          </div>
+
+          <div class="ledger-table">
+            <div class="ledger-row ledger-head">
+              <span v-for="item in feeLedgerItems" :key="item.name">{{ item.name }}</span>
+            </div>
+            <div class="ledger-row">
+              <span v-for="item in feeLedgerItems" :key="item.name">{{ item.value }}</span>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
   </main>
 </template>

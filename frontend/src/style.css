@@ -383,6 +383,164 @@ h2 {
   line-height: 1.5;
 }
 
+.fee-page {
+  min-height: 100vh;
+  padding: 28px;
+}
+
+.fee-topbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.back-button {
+  min-width: 76px;
+  min-height: 40px;
+  border: 1px solid #d8e1de;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #202a31;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  border-color: #9ab8b4;
+  background: #f2f7f6;
+}
+
+.fee-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.fee-item-rail,
+.fee-hero,
+.ledger-panel {
+  border: 1px solid #d8e1de;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.fee-item-rail {
+  display: grid;
+  align-self: start;
+  gap: 10px;
+  padding: 18px;
+}
+
+.fee-item-card {
+  display: grid;
+  gap: 8px;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid #dce4e1;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #202a31;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fee-item-card:hover,
+.fee-item-card.active {
+  border-color: #2f6f73;
+  background: #f2f7f6;
+}
+
+.fee-item-card span {
+  color: #5b6965;
+  font-size: 13px;
+}
+
+.fee-item-card strong {
+  overflow: hidden;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fee-workspace {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.fee-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 170px;
+  padding: 26px;
+}
+
+.fee-hero p:last-child {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: #52615d;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.fee-status-card {
+  display: grid;
+  gap: 10px;
+  min-width: 180px;
+  align-self: stretch;
+  padding: 18px;
+  border-left: 5px solid #2f6f73;
+  border-radius: 8px;
+  background: #f7faf9;
+}
+
+.fee-status-card span {
+  color: #5b6965;
+  font-size: 13px;
+}
+
+.fee-status-card strong {
+  align-self: end;
+  font-size: 24px;
+}
+
+.ledger-panel {
+  overflow-x: auto;
+  padding: 22px;
+}
+
+.ledger-table {
+  min-width: 1100px;
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 90px 90px 110px 90px 90px 90px 120px 90px 90px 120px 110px;
+  gap: 10px;
+  min-height: 52px;
+  align-items: center;
+  padding: 0 12px;
+  border-top: 1px solid #edf1ef;
+}
+
+.ledger-head {
+  min-height: 42px;
+  border-top: 0;
+  border-radius: 8px;
+  background: #f3f6f5;
+  font-weight: 800;
+}
+
+.ledger-row span {
+  overflow: hidden;
+  color: #3d4a46;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 1180px) {
   .boss-home {
     grid-template-columns: 1fr;
@@ -405,15 +563,25 @@ h2 {
 
   .topbar,
   .summary-hero,
+  .fee-hero,
   .fee-grid {
     align-items: stretch;
     flex-direction: column;
   }
 
   .insight-grid,
+  .fee-layout,
   .platform-list,
   .risk-grid {
     grid-template-columns: 1fr;
+  }
+
+  .fee-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .ledger-panel {
+    overflow-x: auto;
   }
 
   h1 {
